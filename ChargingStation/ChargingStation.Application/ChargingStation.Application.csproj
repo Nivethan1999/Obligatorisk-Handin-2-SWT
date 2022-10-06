@@ -7,4 +7,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\ChargingStation.lib\ChargingStation.lib.csproj" />
+    </ItemGroup>
+
 </Project>
