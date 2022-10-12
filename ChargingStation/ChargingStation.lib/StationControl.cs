@@ -49,11 +49,7 @@ namespace ChargingStation
                         _door.LockDoor();
                         _charger.StartCharge();
                         _oldId = id;
-                        using (var writer = File.AppendText(_logFile.fileName))
-                        
-                        {
-                            writer.WriteLine(DateTime.Now + ": Skab låst med RFID: {0}", id);
-                        }
+                        _logFile.WriteLogEntry("Skab låst med RFID", id);
 
                         Console.WriteLine("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op.");
                         _state = ChargingStationState.Locked;
@@ -75,10 +71,7 @@ namespace ChargingStation
                     {
                         _charger.StopCharge();
                         _door.UnlockDoor();
-                        using (var writer = File.AppendText(_logFile.fileName))
-                        {
-                            writer.WriteLine(DateTime.Now + ": Skab låst op med RFID: {0}", id);
-                        }
+                        _logFile.WriteLogEntry("Skab låst op med RFID", id);
 
                         Console.WriteLine("Tag din telefon ud af skabet og luk døren");
                         _state = ChargingStationState.Available;
