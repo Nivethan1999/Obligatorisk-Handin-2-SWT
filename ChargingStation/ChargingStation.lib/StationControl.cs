@@ -86,6 +86,8 @@ namespace ChargingStation
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+        // Triggers til DoorClosed
         private void DoorClosed()
         {
             switch (_state)
@@ -105,6 +107,8 @@ namespace ChargingStation
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+        // Triggers til DoorOpened
         private void DoorOpened()
         {
              switch (_state)
@@ -126,13 +130,7 @@ namespace ChargingStation
                        throw new ArgumentOutOfRangeException();
              }
         }
+        // Her mangler de andre trigger handlere
+    }
 
-          // Her mangler de andre trigger handlere
-     }
-
-    // Triggers til DoorClosed
-
-       
-          // Her mangler de andre trigger handlere
-     }
 }
