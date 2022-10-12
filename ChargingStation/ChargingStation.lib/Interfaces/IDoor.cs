@@ -2,10 +2,31 @@ namespace ChargingStation.lib;
 
 public interface IDoor
 {
-    public void LockDoor();
-    public void UnlockDoor();
     
-    public void OnDoorOpen();
-    public void OnDoorClose();
+    event EventHandler<DoorOpenEventArgs> DoorOpenEvent;
+
+    event EventHandler<DoorClosedEventArgs> DoorCloseEvent;
+
+    void IsDoorOpen();
+
+    void IsDoorClosed();
+
+    void LockDoor();
+
+    void UnlockDoor();
+
     
+
+}
+
+public class DoorOpenEventArgs : EventArgs
+{
+    public bool DoorOpen { get; set; }
+
+}
+
+public class DoorClosedEventArgs : EventArgs
+{
+    public bool DoorClose { get; set; }
+
 }
