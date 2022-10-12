@@ -86,7 +86,29 @@ namespace ChargingStation
                     throw new ArgumentOutOfRangeException();
             }
         }
-        
+        private void DoorClosed()
+        {
+            switch (_state)
+            {
+                case ChargingStationState.Available:
+                    // ignore
+                    break;
+                case ChargingStationState.Locked:
+                    // ignore
+                    break;
+                case ChargingStationState.DoorOpen:
+                    _logFile.WriteLogEntry("Døren blev lukket");
+                    Console.WriteLine("Indlæs RFID");
+                    _state = ChargingStationState.Available;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
         // Her mangler de andre trigger handlere
     }
+
+    // Triggers til DoorClosed
+
 }
