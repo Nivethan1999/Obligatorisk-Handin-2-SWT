@@ -8,5 +8,18 @@ public class RfidReader : IRfidReader
     {
         throw new NotImplementedException();
     }
+
+    public double CurrentValue { get; }
+    public void RfidDetected(int Id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool ReadRfid()
+    {
+        throw new NotImplementedException();
+    }
+
+    public event EventHandler<RFIDDetectedEvent>? DetectedEvent;
 }
     
