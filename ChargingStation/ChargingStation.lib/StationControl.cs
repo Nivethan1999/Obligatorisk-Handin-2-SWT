@@ -51,12 +51,12 @@ namespace ChargingStation
                         _oldId = id;
                         _logFile.WriteLogEntry("Skab låst med RFID", id);
 
-                        Console.WriteLine("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op.");
+                        _display.LoadRFID();
                         _state = ChargingStationState.Locked;
                     }
                     else
                     {
-                        Console.WriteLine("Din telefon er ikke ordentlig tilsluttet. Prøv igen.");
+                        _display.ConnectPhone();
                     }
 
                     break;
@@ -73,12 +73,12 @@ namespace ChargingStation
                         _door.UnlockDoor();
                         _logFile.WriteLogEntry("Skab låst op med RFID", id);
 
-                        Console.WriteLine("Tag din telefon ud af skabet og luk døren");
+                        _display.RemovePhone();
                         _state = ChargingStationState.Available;
                     }
                     else
                     {
-                        Console.WriteLine("Forkert RFID tag");
+                        _display.RFIDError();
                     }
 
                     break;
