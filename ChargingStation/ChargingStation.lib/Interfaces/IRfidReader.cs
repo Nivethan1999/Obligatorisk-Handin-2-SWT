@@ -14,4 +14,5 @@ public interface IRfidReader
      public bool ReadRfid();
 
      event EventHandler<RFIDDetectedEvent> DetectedEvent;
+     void OnRfidRead(int id);
 }
