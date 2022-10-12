@@ -1,23 +1,30 @@
 using ChargingStation.lib;
+using UsbSimulator;
 
 namespace ChargingStation.test;
 
 public class ChargeControl : IChargeControl
 {
-    
-    public bool Connected { set; get; }
+    private IUsbCharger _charger;
+    public bool Connected { get;}
     
     public ChargeControl()
     {
-        Connected = false;
+        
+        _charger = new UsbChargerSimulator();
+        Connected = _charger.Connected;
     }
     public void StartCharge()
     {
-        throw new NotImplementedException();
+        _charger.StartCharge();
     }
 
     public void StopCharge()
     {
-        throw new NotImplementedException();
+        _charger.StopCharge();
     }
+    
+    
+    
+    
 }
