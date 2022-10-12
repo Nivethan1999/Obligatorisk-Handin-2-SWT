@@ -82,9 +82,11 @@ namespace ChargingStation
                     }
 
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
-
+        
         // Her mangler de andre trigger handlere
     }
 }
