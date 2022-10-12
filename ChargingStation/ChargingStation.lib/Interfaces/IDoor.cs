@@ -7,14 +7,13 @@ public interface IDoor
 
     event EventHandler<DoorClosedEventArgs> DoorCloseEvent;
 
-    void OnDoorClose();
-
-    void OnDoorOpen();
-
     void LockDoor();
 
     void UnlockDoor();
-
+    
+    void OnDoorOpen();
+    
+    void OnDoorClose();
     
 
 }

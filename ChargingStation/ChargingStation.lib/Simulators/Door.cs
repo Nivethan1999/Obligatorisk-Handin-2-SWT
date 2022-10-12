@@ -26,19 +26,6 @@ public class Door : IDoor
         DoorLocked = false;
     }
 
-    public void IsDoorClosed()
-    {
-        if (!DoorState || DoorLocked)
-        {
-            Close.
-        }
-    }
-
-    public void IsDoorOpen()
-    {
-        
-    }
-
     public void LockDoor()
     {
         throw new NotImplementedException();
@@ -47,5 +34,15 @@ public class Door : IDoor
     public void UnlockDoor()
     {
         throw new NotImplementedException();
+    }
+
+    public void OnDoorOpen()
+    {
+        DoorOpenEvent?.Invoke(this, Open);
+    }
+    
+    public void OnDoorClose()
+    {
+        DoorCloseEvent?.Invoke(this, Close);
     }
 }

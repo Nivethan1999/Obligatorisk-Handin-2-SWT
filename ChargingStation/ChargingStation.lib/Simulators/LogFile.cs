@@ -10,6 +10,12 @@ public class LogFile : ILog
         using var writer = File.AppendText(fileName);
         writer.WriteLine(DateTime.Now + ": {0}: {1}", message, id);
     }
+    
+    public void WriteLogEntry(string message)
+    {
+        using var writer = File.AppendText(fileName);
+        writer.WriteLine(DateTime.Now + ": {0}", message);
+    }
 
     public LogFile(string fileName)
     {
