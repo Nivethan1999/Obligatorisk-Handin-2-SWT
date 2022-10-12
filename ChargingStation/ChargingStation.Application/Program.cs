@@ -1,7 +1,15 @@
-﻿internal class Program
+﻿using ChargingStation.lib;
+using ChargingStation.lib.Interfaces;
+using ChargingStation.lib.Simulators;
+
+internal class Program
 {
     private static void Main(string[] args)
     {
+        IDoor door = new Door();
+        IRfidReader rfidReader = new RfidReader();
+        
+        
         // Assemble your system here from all the classes
 
         var finish = false;

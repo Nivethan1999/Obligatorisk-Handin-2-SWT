@@ -38,26 +38,26 @@ namespace UsbSimulator
         private void TimerOnElapsed(object sender, ElapsedEventArgs e)
         {
             // Only execute if charging
-            if (_charging)
+            if (!_charging) return;
+            _ticksSinceStart++;
+            switch (Connected)
             {
-                _ticksSinceStart++;
-                if (Connected && !_overload)
+                case true when !_overload:
                 {
                     double newValue = MaxCurrent - 
                                       _ticksSinceStart * (MaxCurrent - FullyChargedCurrent) / (ChargeTimeMinutes * 60 * 1000 / CurrentTickInterval);
                     CurrentValue = Math.Max(newValue, FullyChargedCurrent);
+                    break;
                 }
-                else if (Connected && _overload)
-                {
+                case true when _overload:
                     CurrentValue = OverloadCurrent;
-                }
-                else if (!Connected)
-                {
+                    break;
+                case false:
                     CurrentValue = 0.0;
-                }
-
-                OnNewCurrent();
+                    break;
             }
+
+            OnNewCurrent();
         }
 
         public void SimulateConnected(bool connected)
@@ -73,28 +73,21 @@ namespace UsbSimulator
         public void StartCharge()
         {
             // Ignore if already charging
-            if (!_charging)
+            if (_charging) return;
+            CurrentValue = Connected switch
             {
-                if (Connected && !_overload)
-                {
-                    CurrentValue = 500;
-                }
-                else if (Connected && _overload)
-                {
-                    CurrentValue = OverloadCurrent;
-                }
-                else if (!Connected)
-                {
-                    CurrentValue = 0.0;
-                }
+                true when !_overload => 500,
+                true when _overload => OverloadCurrent,
+                false => 0.0,
+                _ => CurrentValue
+            };
 
-                OnNewCurrent();
-                _ticksSinceStart = 0;
+            OnNewCurrent();
+            _ticksSinceStart = 0;
 
-                _charging = true;
+            _charging = true;
 
-                _timer.Start();
-            }
+            _timer.Start();
         }
 
         public void StopCharge()
