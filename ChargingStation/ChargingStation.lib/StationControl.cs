@@ -86,7 +86,27 @@ namespace ChargingStation
                     throw new ArgumentOutOfRangeException();
             }
         }
-        
-        // Her mangler de andre trigger handlere
-    }
+        private void DoorOpened()
+        {
+             switch (_state)
+             {
+                  case ChargingStationState.Available:
+                       _logFile.WriteLogEntry("Døren blev åbnet");
+                       Console.WriteLine("Tilslut telefon");
+                       _state = ChargingStationState.DoorOpen;
+                       break;
+
+                  case ChargingStationState.DoorOpen:
+                       // Ignore
+                       break;
+
+                  case ChargingStationState.Locked:
+                       Console.WriteLine("Døren er låst");
+                       break;
+                  default:
+                       throw new ArgumentOutOfRangeException();
+             }
+        }
+          // Her mangler de andre trigger handlere
+     }
 }
