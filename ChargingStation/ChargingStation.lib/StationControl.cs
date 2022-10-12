@@ -50,8 +50,7 @@ namespace ChargingStation
                         _charger.StartCharge();
                         _oldId = id;
                         _logFile.WriteLogEntry("Skab låst med RFID", id);
-
-                        _display.LoadRFID();
+                        _display.Occupied();
                         _state = ChargingStationState.Locked;
                     }
                     else
@@ -100,7 +99,7 @@ namespace ChargingStation
                     break;
                 case ChargingStationState.DoorOpen:
                     _logFile.WriteLogEntry("Døren blev lukket");
-                    Console.WriteLine("Indlæs RFID");
+                    _display.LoadRFID();
                     _state = ChargingStationState.Available;
                     break;
                 default:
@@ -115,7 +114,7 @@ namespace ChargingStation
              {
                   case ChargingStationState.Available:
                        _logFile.WriteLogEntry("Døren blev åbnet");
-                       Console.WriteLine("Tilslut telefon");
+                       _display.ConnectPhone();
                        _state = ChargingStationState.DoorOpen;
                        break;
 
