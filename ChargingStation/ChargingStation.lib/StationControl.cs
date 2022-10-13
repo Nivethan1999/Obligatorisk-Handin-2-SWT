@@ -29,6 +29,7 @@ namespace ChargingStation
         private IDisplay _display = new Display();
         private ILog _logFile = new LogFile("logfile.txt");
         
+        
 
         
         // Her mangler constructor
@@ -131,5 +132,4 @@ namespace ChargingStation
         }
         // Her mangler de andre trigger handlere
     }
-
 }
