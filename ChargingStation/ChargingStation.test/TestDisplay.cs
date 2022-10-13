@@ -56,4 +56,17 @@ namespace ChargingStation.test
 
     }
 
+        public void ConnectionError()
+        {
+             display_.ConnectionError();
+             Assert.That(output.ToString(), Contains.Substring("Din telefon er ikke ordentlig tilsluttet. Prøv igen."));
+        }
+        [Test]
+        public void LoadRFID()
+        {
+             display_.LoadRFID();
+             Assert.That(output.ToString(), Contains.Substring("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op."));
+        }
+
+     }
 }
