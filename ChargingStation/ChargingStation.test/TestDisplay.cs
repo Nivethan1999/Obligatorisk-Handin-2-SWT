@@ -54,19 +54,21 @@ namespace ChargingStation.test
             Assert.That(output.ToString(), Contains.Substring("Tag din telefon ud af skabet og luk døren"));
         }
 
-    }
-
         public void ConnectionError()
         {
-             display_.ConnectionError();
-             Assert.That(output.ToString(), Contains.Substring("Din telefon er ikke ordentlig tilsluttet. Prøv igen."));
+            display_.ConnectionError();
+            Assert.That(output.ToString(), Contains.Substring("Din telefon er ikke ordentlig tilsluttet. Prøv igen."));
         }
         [Test]
         public void LoadRFID()
         {
-             display_.LoadRFID();
-             Assert.That(output.ToString(), Contains.Substring("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op."));
+            display_.LoadRFID();
+            Assert.That(output.ToString(), Contains.Substring("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op."));
         }
 
-     }
+    }
+
+        
+
+     
 }
