@@ -13,19 +13,47 @@ namespace ChargingStation.test
     {
         Display display_;
         private StringWriter output;
+
         [SetUp]
 
         public void Setup()
         {
-             output = new StringWriter();
+            output = new StringWriter();
             display_ = new Display();
-            Console.SetOut(output);        }
+            Console.SetOut(output);
+        }
 
         [Test]
         public void ConnectPhoneTest()
         {
-             display_.ConnectPhone();
-             Assert.That(output.ToString(), Contains.Substring("Tilslut telefon"));
+            display_.ConnectPhone();
+            Assert.That(output.ToString(), Contains.Substring("Tilslut telefon"));
         }
+
+        [Test]
+
+        public void OccupiedTest()
+        {
+            display_.Occupied();
+            Assert.That(output.ToString(), Contains.Substring("Ladeskab optaget"));
+        }
+
+        [Test]
+
+        public void RFIDErrorTest()
+        {
+            display_.RFIDError();
+            Assert.That(output.ToString(), Contains.Substring("Forkert RFID tag"));
+        }
+
+        [Test]
+
+        public void RemovePhoneTest()
+        {
+            display_.RemovePhone();
+            Assert.That(output.ToString(), Contains.Substring("Tag din telefon ud af skabet og luk døren"));
+        }
+
     }
+
 }
