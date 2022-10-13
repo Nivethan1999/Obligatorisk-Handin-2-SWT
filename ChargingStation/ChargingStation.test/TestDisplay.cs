@@ -11,20 +11,21 @@ namespace ChargingStation.test
 {
     public class TestDisplay
     {
-        IDisplay display_;
-
+        Display display_;
+        private StringWriter output;
         [SetUp]
 
         public void Setup()
         {
+             output = new StringWriter();
             display_ = new Display();
-        }
+            Console.SetOut(output);        }
 
         [Test]
         public void ConnectPhoneTest()
         {
-            Assert.That(display_.ConnectPhone, Is.True);
-            
+             display_.ConnectPhone();
+             Assert.That(output.ToString(), Contains.Substring("Tilslut telefon"));
         }
     }
 }
