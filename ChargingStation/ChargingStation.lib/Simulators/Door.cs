@@ -6,16 +6,6 @@ public class Door : IDoor
     public event EventHandler<DoorOpenEventArgs> DoorOpenEvent;
     public event EventHandler<DoorClosedEventArgs> DoorCloseEvent;
 
-    private DoorOpenEventArgs Open = new DoorOpenEventArgs
-    {
-        DoorOpen = false
-    };
-
-    private DoorClosedEventArgs Close = new DoorClosedEventArgs
-    {
-        DoorClose = false
-    };
-
     public bool DoorState { get; private set; }
 
     public bool DoorLocked { get; private set; }
@@ -25,6 +15,8 @@ public class Door : IDoor
         DoorState = false;
         DoorLocked = false;
     }
+
+    
 
     public void LockDoor()
     {
@@ -38,11 +30,21 @@ public class Door : IDoor
 
     public void OnDoorOpen()
     {
-        DoorOpenEvent?.Invoke(this, Open);
+        throw new NotImplementedException();
     }
-    
+
     public void OnDoorClose()
     {
-        DoorCloseEvent?.Invoke(this, Close);
+        throw new NotImplementedException();
     }
+
+    //public void OnDoorOpen()
+    //{
+    //    DoorOpenEvent?.Invoke(this, DoorState);
+    //}
+    
+    //public void OnDoorClose()
+    //{
+    //    DoorCloseEvent?.Invoke(this, Close);
+    //}
 }

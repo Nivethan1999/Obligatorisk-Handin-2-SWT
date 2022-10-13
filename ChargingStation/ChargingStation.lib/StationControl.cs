@@ -28,14 +28,22 @@ namespace ChargingStation
         private IDoor _door = new Door();
         private IDisplay _display = new Display();
         private ILog _logFile = new LogFile("logfile.txt");
-        
+        private IRfidReader _reader = new RfidReader();
         
 
         
         // Her mangler constructor
-        public StationControl()
+        public StationControl(IRfidReader reader, IChargeControl charger, IDoor door, IDisplay display, ILog logFile)
         {
             _state = ChargingStationState.Available;
+            _reader = reader;
+            _charger = charger;
+            _door = door;
+            _display = display;
+            _logFile = logFile;
+
+
+            
         }
 
         // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
@@ -47,8 +55,9 @@ namespace ChargingStation
                     // Check for ladeforbindelse
                     if (_charger.Connected)
                     {
+                        
                         _door.LockDoor();
-                        _charger.StartCharge();
+                        _charger.StartCharge(); 
                         _oldId = id;
                         _logFile.WriteLogEntry("Skab låst med RFID", id);
                         _display.Occupied();
