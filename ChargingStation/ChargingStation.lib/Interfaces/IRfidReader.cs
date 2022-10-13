@@ -8,4 +8,5 @@ public class RFIDDetectedEvent : EventArgs
 public interface IRfidReader
 {
      event EventHandler<RFIDDetectedEvent> DetectedEvent;
+     void OnRfidRead(int id);
 }
