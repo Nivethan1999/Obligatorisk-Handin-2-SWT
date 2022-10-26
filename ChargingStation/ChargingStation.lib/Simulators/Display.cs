@@ -11,12 +11,12 @@ public class Display : IDisplay
 
     public void ConnectionError()
     {
-        Console.WriteLine("Din telefon er ikke ordentlig tilsluttet. Prøv igen.");
+        Console.WriteLine("Din telefon er ikke ordentlig tilsluttet. PrÃ¸v igen.");
     }
 
     public void LoadRFID()
     {
-        Console.WriteLine("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op.");
+        Console.WriteLine("Skabet er lÃ¥st og din telefon lades. Brug dit RFID tag til at lÃ¥se op.");
 
     }
 
@@ -32,7 +32,7 @@ public class Display : IDisplay
 
     public void RemovePhone()
     {
-        Console.WriteLine("Tag din telefon ud af skabet og luk døren");
+        Console.WriteLine("Tag din telefon ud af skabet og luk dÃ¸ren");
 
     }
 }
