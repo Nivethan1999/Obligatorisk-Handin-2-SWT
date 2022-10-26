@@ -15,25 +15,22 @@ public class Door : IDoor
     {
         DoorClose = false
     };
-
-    public bool DoorState { get; private set; }
-
     public bool DoorLocked { get; private set; }
 
     public Door()
     {
-        DoorState = false;
+        
         DoorLocked = false;
     }
 
     public void LockDoor()
     {
-        throw new NotImplementedException();
+        DoorLocked = true;
     }
 
     public void UnlockDoor()
     {
-        throw new NotImplementedException();
+        DoorLocked = false;
     }
 
     public void OnDoorOpen()
