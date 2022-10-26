@@ -2,44 +2,52 @@ namespace ChargingStation.lib;
 
 public class Door : IDoor
 {
-    // Constants
-    public event EventHandler<DoorOpenEventArgs> DoorOpenEvent;
-    public event EventHandler<DoorClosedEventArgs> DoorCloseEvent;
+    public bool DoorLocked { get; set; } 
+    public bool DoorIsOpen { get; set; }
 
-    private DoorOpenEventArgs Open = new DoorOpenEventArgs
+    private DoorEventArgs _doorEventArgs = new DoorEventArgs()
     {
-        DoorOpen = false
+        DoorIsOpen = false
     };
 
-    private DoorClosedEventArgs Close = new DoorClosedEventArgs
-    {
-        DoorClose = false
-    };
-    public bool DoorLocked { get; private set; }
-
+    // Events
+    public event EventHandler<DoorEventArgs>? DoorEvent;
+    
+    // Constructor
     public Door()
     {
-        
         DoorLocked = false;
+        DoorIsOpen = false;
     }
-
+    
+    // Methods
     public void LockDoor()
     {
+        if (DoorLocked || DoorIsOpen) return;
         DoorLocked = true;
     }
 
     public void UnlockDoor()
     {
+        if (!DoorLocked) return;
         DoorLocked = false;
     }
 
-    public void OnDoorOpen()
+    public virtual void OnDoorOpened()
     {
-        DoorOpenEvent?.Invoke(this, Open);
+        if (DoorLocked || DoorIsOpen) return;
+        
+        DoorIsOpen = true;
+        _doorEventArgs.DoorIsOpen = true;
+        DoorEvent?.Invoke(this, _doorEventArgs);
     }
     
-    public void OnDoorClose()
+    public virtual void OnDoorClosed()
     {
-        DoorCloseEvent?.Invoke(this, Close);
+        if (DoorLocked || !DoorIsOpen) return;
+        
+        DoorIsOpen = false;
+        _doorEventArgs.DoorIsOpen = false;
+        DoorEvent?.Invoke(this, _doorEventArgs);
     }
 }

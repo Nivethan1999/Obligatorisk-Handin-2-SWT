@@ -1,6 +1,8 @@
-﻿using ChargingStation.lib;
+﻿using ChargingStation;
+using ChargingStation.lib;
 using ChargingStation.lib.Interfaces;
 using ChargingStation.lib.Simulators;
+using ChargingStation.test;
 
 internal class Program
 {
@@ -8,7 +10,11 @@ internal class Program
     {
         IDoor door = new Door();
         IRfidReader rfidReader = new RfidReader();
-        
+        IDisplay display = new Display();
+        IChargeControl chargeControl = new ChargeControl();
+        ILog log = new LogFile("ProgramLog.txt");
+
+        var stationControl = new StationControl(rfidReader,  chargeControl, door, display, log);
         
         // Assemble your system here from all the classes
 
@@ -27,11 +33,11 @@ internal class Program
                     break;
 
                 case 'O':
-                    door.OnDoorOpen();
+                    door.OnDoorOpened();
                     break;
 
                 case 'C':
-                    door.OnDoorClose();
+                    door.OnDoorClosed();
                     break;
 
                 case 'R':

@@ -1,27 +1,22 @@
 namespace ChargingStation.lib;
+public class DoorEventArgs : EventArgs
+{
+    public bool DoorIsOpen { get; set; }
+}
 
 public interface IDoor
 {
-     event EventHandler<DoorOpenEventArgs> DoorOpenEvent;
+    bool DoorLocked { get; set; }
+    bool DoorIsOpen { get; set; }
 
-    event EventHandler<DoorClosedEventArgs> DoorCloseEvent;
+
+    public event EventHandler<DoorEventArgs> DoorEvent; 
 
     void LockDoor();
 
     void UnlockDoor();
-    
-    void OnDoorOpen();
-    
-    void OnDoorClose();
-}
 
-public class DoorOpenEventArgs : EventArgs
-{
-    public bool DoorOpen { get; set; }
-}
+    virtual void OnDoorOpened() { }
 
-public class DoorClosedEventArgs : EventArgs
-{
-    public bool DoorClose { get; set; }
-
+    virtual void OnDoorClosed () { }
 }
