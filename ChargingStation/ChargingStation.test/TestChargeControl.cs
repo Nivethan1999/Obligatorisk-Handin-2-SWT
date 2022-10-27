@@ -29,10 +29,30 @@ public class TestChargeControl
      }
 
      [Test]
+     public void TestNoCharge()
+     {
+          var value = 0;
+          _uut._charger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = value });
+          //_uut.Received(1).StopCharge();
+          Assert.That(_uut.lastCurrent, Is.EqualTo(value));
+     }
+
+     [Test]
+     public void TestFullyCharge()
+     {
+          var value = 3;
+          _uut._charger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = value });
+         // _uut.Received(1).StopCharge();
+          Assert.That(_uut.lastCurrent, Is.EqualTo(value));
+     }
+
+     [Test]
     public void TestStopCharge()
     {
-         _uut._charger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = 501 });
-         Assert.That(_uut.lastCurrent, Is.GreaterThan(500));
+         var value = 501;
+          _uut._charger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = value });
+         //_uut.Received(1).StopCharge();
+         Assert.That(_uut.lastCurrent, Is.EqualTo(value));
      }
     
     [Test]
