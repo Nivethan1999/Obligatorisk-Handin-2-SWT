@@ -41,10 +41,6 @@ namespace ChargingStation
             _door = door;
             _display = display;
             _logFile = logFile;
-            
-            //_door.DoorEvent += _display.OnDoorOpened;
-            //_door.DoorEvent += _display.OnDoorClosed;
-
         }
 
         // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
