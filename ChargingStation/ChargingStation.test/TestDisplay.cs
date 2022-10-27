@@ -48,7 +48,7 @@ namespace ChargingStation.test
 
         [Test]
 
-        public void RemovePhoneTestTest()
+        public void RemovePhoneTest()
         {
             display_.RemovePhone();
             Assert.That(output.ToString(), Contains.Substring("Tag din telefon ud af skabet og luk døren"));
