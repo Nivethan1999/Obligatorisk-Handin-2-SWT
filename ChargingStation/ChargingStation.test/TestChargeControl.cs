@@ -27,6 +27,13 @@ public class TestChargeControl
         Assert.That(_uut.lastCurrent, Is.EqualTo(500));
 
     }
+
+    [Test]
+    public void TestStopCharge()
+    {
+         _uut._charger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = 501 });
+         Assert.That(_uut.lastCurrent, Is.GreaterThan(500));
+     }
     
     [Test]
     public void TestOverloadCurrent()
