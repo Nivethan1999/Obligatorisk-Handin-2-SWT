@@ -11,10 +11,10 @@ internal class Program
         Door door = new Door();
         RfidReader rfidReader = new RfidReader();
         Display display = new Display();
-        ChargeControl chargeControl = new ChargeControl();
+        //ChargeControl chargeControl = new ChargeControl();
         LogFile log = new LogFile("ProgramLog.txt");
 
-        var stationControl = new StationControl(rfidReader,  chargeControl, door, display, log);
+        //var stationControl = new StationControl(rfidReader,  chargeControl, door, display, log);
         
         // Assemble your system here from all the classes
 
