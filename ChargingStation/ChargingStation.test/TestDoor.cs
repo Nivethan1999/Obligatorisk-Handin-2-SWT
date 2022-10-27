@@ -13,6 +13,7 @@ namespace ChargingStation.test
     public class TestDoor
     {
         private IDoor _uut;
+        
         [SetUp]
         public void Setup()
         {
@@ -26,11 +27,13 @@ namespace ChargingStation.test
         [TestCase(false,false)]
         public void TestLockDoor(bool DoorOpen, bool DoorLocked)
         {
+            
             _uut.DoorLocked = DoorLocked;
             _uut.DoorIsOpen = DoorOpen;
             _uut.LockDoor();
-
+            
             Assert.That(_uut.DoorLocked, !_uut.DoorIsOpen ? Is.EqualTo(true) : Is.EqualTo(false));
+            
         }
         [TestCase(true, true)]
         [TestCase(true, false)]

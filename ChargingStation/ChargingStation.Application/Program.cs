@@ -45,7 +45,7 @@ internal class Program
                     var idString = Console.ReadLine();
 
                     var id = Convert.ToInt32(idString);
-                    rfidReader.OnRfidRead(id);
+                    rfidReader.OnRfidDetected(id);
                     break;
             }
         } while (!finish);
