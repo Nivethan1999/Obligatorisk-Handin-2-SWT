@@ -20,15 +20,15 @@ public class TestChargeControl
         _uut = new ChargeControl(_display,_usbCharger);
     }
 
-    //[Test]
-    //public void TestStartCharge()
-    //{
-    //    _uut._charger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() {Current = 500});
-    //    Assert.That(_uut.lastCurrent, Is.EqualTo(500));
+     [Test]
+     public void TestStartCharge()
+     {
+          _uut._charger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = 500 });
+          Assert.That(_uut.lastCurrent, Is.EqualTo(500));
 
-    //}
+     }
 
-    [Test]
+     [Test]
     public void TestStopCharge()
     {
          _uut._charger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = 501 });
