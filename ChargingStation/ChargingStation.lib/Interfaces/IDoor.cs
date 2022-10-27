@@ -18,7 +18,7 @@ public interface IDoor
 
     void UnlockDoor();
 
-    virtual void OnDoorOpened() { }
+    
 
-    virtual void OnDoorClosed () { }
+    
 }

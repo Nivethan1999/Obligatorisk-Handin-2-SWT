@@ -12,13 +12,7 @@ namespace ChargingStation.test
 {
     public class TestRfid
     {
-        private IDoor _door;
-        private IRfidReader _uut;
-        private IChargeControl _chargeControl;
-        private IDisplay _display;
-        private ILog _logFile;
-        private StationControl _stationControl;
-
+        private RfidReader _uut;
         private int detectedId;
         
         [SetUp]
@@ -32,7 +26,6 @@ namespace ChargingStation.test
         {
             detectedId = eventArgs.ID;
         }
-       
         
         [TestCase(1)]
         [TestCase(2)]
@@ -42,9 +35,5 @@ namespace ChargingStation.test
             _uut.OnRfidDetected(id);
             Assert.That(detectedId, Is.EqualTo(id));
         }
-        
-        
-
-        
     }
 }

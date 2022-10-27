@@ -8,11 +8,11 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        IDoor door = new Door();
-        IRfidReader rfidReader = new RfidReader();
-        IDisplay display = new Display();
-        IChargeControl chargeControl = new ChargeControl();
-        ILog log = new LogFile("ProgramLog.txt");
+        Door door = new Door();
+        RfidReader rfidReader = new RfidReader();
+        Display display = new Display();
+        ChargeControl chargeControl = new ChargeControl();
+        LogFile log = new LogFile("ProgramLog.txt");
 
         var stationControl = new StationControl(rfidReader,  chargeControl, door, display, log);
         

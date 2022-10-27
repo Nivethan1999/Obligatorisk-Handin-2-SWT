@@ -12,7 +12,7 @@ namespace ChargingStation.test
 {
     public class TestDoor
     {
-        private IDoor _uut;
+        private Door _uut;
         
         [SetUp]
         public void Setup()

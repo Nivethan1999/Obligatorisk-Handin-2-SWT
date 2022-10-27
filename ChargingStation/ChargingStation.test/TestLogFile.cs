@@ -5,7 +5,7 @@ namespace ChargingStation.test;
 
 public class Tests
 {
-    ILog _log;
+    LogFile _log;
     [SetUp]
     public void Setup()
     {
