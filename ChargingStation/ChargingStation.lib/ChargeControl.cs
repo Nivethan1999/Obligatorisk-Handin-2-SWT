@@ -35,7 +35,7 @@ public class ChargeControl : IChargeControl
         
         switch (e.Current)
         {   
-            case 0:
+            case 0.0:
                 _display.ConnectPhone();
                 break;
             case > 0.0 and <= 5.0:
