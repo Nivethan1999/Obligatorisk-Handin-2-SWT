@@ -8,6 +8,7 @@ using ChargingStation.lib;
 using ChargingStation.lib.Interfaces;
 using ChargingStation.lib.Simulators;
 using ChargingStation.test;
+using UsbSimulator;
 
 namespace ChargingStation
 {
@@ -23,12 +24,13 @@ namespace ChargingStation
 
         // Her mangler flere member variable
         private ChargingStationState _state;
-        private IChargeControl _charger = new ChargeControl();
+        private IUsbCharger _usbcharger;
+        private IDisplay _display;
+        private IChargeControl _charger;
         private int _oldId;
-        private IDoor _door = new Door();
-        private IDisplay _display = new Display();
-        private ILog _logFile = new LogFile("logfile.txt");
-        private IRfidReader _reader = new RfidReader();
+        private IDoor _door;
+        private ILog _logFile;
+        private IRfidReader _reader;
         
 
         
@@ -44,7 +46,7 @@ namespace ChargingStation
 
             _door.DoorEvent += this.OnDoorOpened;
             _door.DoorEvent += this.OnDoorClosed;
-
+                
             _reader.RfidEvent += this.OnRfidDetected;
 
         }
@@ -144,9 +146,7 @@ namespace ChargingStation
                        throw new ArgumentOutOfRangeException();
              }
         }
-        
-        
-        
+
         // Her mangler de andre trigger handlere
     }
 }

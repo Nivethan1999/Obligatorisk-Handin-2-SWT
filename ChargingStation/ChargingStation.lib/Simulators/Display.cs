@@ -17,9 +17,17 @@ public class Display : IDisplay
     public void LoadRFID()
     {
         Console.WriteLine("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op.");
-
+    }
+    public void PhoneConnected()
+    {
+        Console.WriteLine("Telefonen er tilsluttet korrekt");
     }
 
+    public void ChargeError()
+    {
+        Console.WriteLine("Fejl i opladning");
+    }
+    
     public void Occupied()
     {
         Console.WriteLine("Ladeskab optaget");

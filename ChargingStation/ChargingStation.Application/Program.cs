@@ -39,7 +39,6 @@ internal class Program
                 case 'C':
                     door.OnDoorClosed();
                     break;
-
                 case 'R':
                     Console.WriteLine("Indtast RFID id: ");
                     var idString = Console.ReadLine();

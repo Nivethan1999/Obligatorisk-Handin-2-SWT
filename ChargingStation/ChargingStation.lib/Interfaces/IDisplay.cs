@@ -11,7 +11,11 @@ public interface IDisplay
     void Occupied();
 
     void RFIDError();
+    
+    void PhoneConnected();
 
     void RemovePhone();
+    
+    void ChargeError();
 
 }
