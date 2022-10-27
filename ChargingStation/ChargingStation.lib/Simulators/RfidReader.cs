@@ -4,14 +4,11 @@ namespace ChargingStation.lib.Simulators;
 
 public class RfidReader : IRfidReader
 {
-     public event EventHandler<RFIDDetectedEvent>? DetectedEvent;
-     public void OnRfidRead(int id)
-     {
-          throw new NotImplementedException();
-     }
 
-     public void ReadRfid(int id)
+    public event EventHandler<RfidEventArgs>? RfidEvent;
+
+     public void OnRfidDetected(int id)
      {
-          DetectedEvent?.Invoke(this,new RFIDDetectedEvent{ID = id});
+         RfidEvent?.Invoke(this, new RfidEventArgs {ID = id});
      }
 }

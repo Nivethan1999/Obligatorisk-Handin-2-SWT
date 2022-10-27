@@ -8,6 +8,8 @@ public interface IDoor
 {
     bool DoorLocked { get; set; }
     bool DoorIsOpen { get; set; }
+    
+    int _currentId { get; set; }
 
 
     public event EventHandler<DoorEventArgs> DoorEvent; 
