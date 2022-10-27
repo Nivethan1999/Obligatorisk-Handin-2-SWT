@@ -4,7 +4,7 @@ namespace ChargingStation.lib.Simulators;
 
 public class Display : IDisplay
 {
-     public void ConnectPhone()
+    public void ConnectPhone()
     {
         Console.WriteLine("Tilslut telefon");        
     }

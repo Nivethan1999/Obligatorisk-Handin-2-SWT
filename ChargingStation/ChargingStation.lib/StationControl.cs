@@ -41,10 +41,16 @@ namespace ChargingStation
             _door = door;
             _display = display;
             _logFile = logFile;
+
+            _door.DoorEvent += this.OnDoorOpened;
+            _door.DoorEvent += this.OnDoorClosed;
+
+            _reader.RfidEvent += this.OnRfidDetected;
+
         }
 
         // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
-        private void RfidDetected(int id)
+        private void OnRfidDetected(object source, RfidEventArgs eventArgs)
         {
             switch (_state)
             {
@@ -55,8 +61,8 @@ namespace ChargingStation
                         
                         _door.LockDoor();
                         _charger.StartCharge(); 
-                        _oldId = id;
-                        _logFile.WriteLogEntry("Skab låst med RFID", id);
+                        _oldId = eventArgs.ID;
+                        _logFile.WriteLogEntry("Skab låst med RFID", eventArgs.ID);
                         _display.Occupied();
                         _state = ChargingStationState.Locked;
                     }
@@ -73,11 +79,11 @@ namespace ChargingStation
 
                 case ChargingStationState.Locked:
                     // Check for correct ID
-                    if (id == _oldId)
+                    if (eventArgs.ID == _oldId)
                     {
                         _charger.StopCharge();
                         _door.UnlockDoor();
-                        _logFile.WriteLogEntry("Skab låst op med RFID", id);
+                        _logFile.WriteLogEntry("Skab låst op med RFID", eventArgs.ID);
 
                         _display.RemovePhone();
                         _state = ChargingStationState.Available;
@@ -94,8 +100,9 @@ namespace ChargingStation
         }
 
         // Triggers til DoorClosed
-        private void DoorClosed()
+        private void OnDoorClosed(object source, DoorEventArgs eventArgs)
         {
+            if (eventArgs.DoorIsOpen) return;
             switch (_state)
             {
                 case ChargingStationState.Available:
@@ -115,8 +122,9 @@ namespace ChargingStation
         }
 
         // Triggers til DoorOpened
-        private void DoorOpened()
+        private void OnDoorOpened(object source, DoorEventArgs eventArgs)
         {
+            if (!eventArgs.DoorIsOpen) return;
              switch (_state)
              {
                   case ChargingStationState.Available:
@@ -136,6 +144,9 @@ namespace ChargingStation
                        throw new ArgumentOutOfRangeException();
              }
         }
+        
+        
+        
         // Her mangler de andre trigger handlere
     }
 }

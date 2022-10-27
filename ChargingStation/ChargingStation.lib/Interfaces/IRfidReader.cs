@@ -1,12 +1,12 @@
 namespace ChargingStation.lib.Interfaces;
 
-public class RFIDDetectedEvent : EventArgs
+public class RfidEventArgs : EventArgs
 {
      public int ID { get; set; }
 }
 
 public interface IRfidReader
 {
-     event EventHandler<RFIDDetectedEvent> DetectedEvent;
-     void OnRfidRead(int id);
+     event EventHandler<RfidEventArgs> RfidEvent;
+     void OnRfidDetected(int id);
 }
