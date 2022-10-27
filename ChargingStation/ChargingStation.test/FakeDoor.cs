@@ -11,6 +11,7 @@ namespace ChargingStation.test
      {
           public bool DoorLocked { get; set; }
           public bool DoorIsOpen { get; set; }
+          public int _currentId { get; set; }
 
           private DoorEventArgs _doorEventArgs = new DoorEventArgs()
           {
