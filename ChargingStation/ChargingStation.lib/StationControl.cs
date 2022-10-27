@@ -42,8 +42,8 @@ namespace ChargingStation
             _display = display;
             _logFile = logFile;
             
-            _door.DoorEvent += _display.OnDoorOpened;
-            _door.DoorEvent += _display.OnDoorClosed;
+            //_door.DoorEvent += _display.OnDoorOpened;
+            //_door.DoorEvent += _display.OnDoorClosed;
 
         }
 

@@ -67,23 +67,5 @@ namespace ChargingStation.test
             Assert.That(output.ToString(), Contains.Substring("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op."));
         }
 
-        [Test]
-        // Mangler
-        public void OnDoorOpenedTest()
-        {
-            //display_.OnDoorOpened()
-        }
-
-        [Test]
-        // Mangler
-        public void OnDoorClosedTest()
-        {
-
-        }
-
     }
-
-        
-
-     
 }

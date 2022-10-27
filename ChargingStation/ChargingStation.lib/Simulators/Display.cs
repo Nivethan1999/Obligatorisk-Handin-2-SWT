@@ -4,17 +4,17 @@ namespace ChargingStation.lib.Simulators;
 
 public class Display : IDisplay
 {
-    public void OnDoorOpened(object source, DoorEventArgs eventArgs)
-    {
-        if(!eventArgs.DoorIsOpen) return;
-        ConnectPhone();
-    }
+    //public void OnDoorOpened(object source, DoorEventArgs eventArgs)
+    //{
+    //    if(!eventArgs.DoorIsOpen) return;
+    //    ConnectPhone();
+    //}
     
-    public void OnDoorClosed(object source, DoorEventArgs eventArgs)
-    {
-        if(eventArgs.DoorIsOpen) return;
-        LoadRFID();
-    }
+    //public void OnDoorClosed(object source, DoorEventArgs eventArgs)
+    //{
+    //    if(eventArgs.DoorIsOpen) return;
+    //    LoadRFID();
+    //}
 
     public void ConnectPhone()
     {
