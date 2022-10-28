@@ -75,13 +75,18 @@ public class TestStationControl
     public void TestOnDoorClosedAvailable()
     {
         _uut._state = Available;
+        _uut.OnDoorOpened(this, new DoorEventArgs() { DoorIsOpen = false });
         Assert.That(_uut._state, Is.EqualTo(Available));
+
+      
+
     }
 
     [Test]
     public void TestOnDoorClosedLocked()
     {
         _uut._state = Locked;
+        _uut.OnDoorOpened(this, new DoorEventArgs() { DoorIsOpen = false });
         Assert.That(_uut._state, Is.EqualTo(Locked));
 
     }
