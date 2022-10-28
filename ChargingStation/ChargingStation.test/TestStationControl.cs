@@ -65,4 +65,10 @@ public class TestStationControl
         Assert.That(_uut._state, Is.EqualTo(state));
     }
     
+    [Test]
+    public void TestOnDoorOpenedStateInvalid()
+    {
+        
+    }
+    
 }

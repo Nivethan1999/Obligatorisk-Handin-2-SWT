@@ -95,10 +95,7 @@ namespace ChargingStation
                     {
                         _display.RFIDError();
                     }
-
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -119,8 +116,6 @@ namespace ChargingStation
                     _display.LockWithRfid();
                     _state = ChargingStationState.Available;
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
             Console.WriteLine("CURRENT STATE: " + _state);
         }
@@ -146,8 +141,6 @@ namespace ChargingStation
                        //Console.WriteLine("Døren er låst");
                        _display.DoorLocked();
                        break;
-                  default:
-                       throw new ArgumentOutOfRangeException();
              }
              
         }
