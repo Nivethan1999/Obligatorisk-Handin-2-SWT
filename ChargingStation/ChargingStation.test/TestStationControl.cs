@@ -91,4 +91,15 @@ public class TestStationControl
 
     }
 
+    [Test]
+    public void TestOnDoorClosedDoorOpen()
+    {
+        _uut._state = DoorOpen;
+        _uut.OnDoorClosed(this, new DoorEventArgs() { DoorIsOpen = false });
+        _logFile.Received(1).WriteLogEntry("Døren blev lukket");
+        _display.Received(1).LockWithRfid();
+        Assert.That(_uut._state, Is.EqualTo(Available));
+
+    }
+
 }
