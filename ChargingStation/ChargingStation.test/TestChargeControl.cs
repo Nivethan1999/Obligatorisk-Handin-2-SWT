@@ -18,10 +18,18 @@ public class TestChargeControl
         _display = Substitute.For<Display>();
         _usbCharger = Substitute.For<IUsbCharger>();
         _uut = new ChargeControl(_display,_usbCharger);
+        _usbCharger.CurrentValueEvent += (o, args) => _uut.OnNewCurrent(o,args);
     }
 
-     [Test]
-     public void TestStartCharge()
+    [Test]
+    public void TestStartCharge()
+    {
+        _uut.StartCharge();
+        _usbCharger.Received(1).StartCharge();
+    }
+
+    [Test]
+     public void TestNormalCharge()
      {
           _uut._charger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = 500 });
           Assert.That(_uut.lastCurrent, Is.EqualTo(500));
@@ -31,8 +39,11 @@ public class TestChargeControl
      [Test]
      public void TestNoCharge()
      {
+         _uut._lastState = ChargeControl.State.Charging;
           double value = 0.0;
+          
           _uut._charger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = value });
+          _display.Received(1).ConnectPhone();
           
           Assert.That(_uut.lastCurrent, Is.EqualTo(value));
      }

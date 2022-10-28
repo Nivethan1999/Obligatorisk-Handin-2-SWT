@@ -10,8 +10,8 @@ public class ChargeControl : IChargeControl
     public IDisplay _display;
     public double lastCurrent { get; private set; }
     public bool Connected { get; private set; }
-    private enum State { Charging, NotCharging, FinishedCharging, Error }
-    private State _lastState = State.NotCharging;
+    public enum State { Charging, NotCharging, FinishedCharging, Error }
+    public State _lastState = State.NotCharging;
     
     public ChargeControl(IDisplay display, IUsbCharger charger)
     {
