@@ -39,7 +39,8 @@ public class TestChargeControl
      [Test]
      public void TestNoCharge()
      {
-         _uut._lastState = ChargeControl.State.Charging;
+         // Sets the state previous to the test to "Charging at 500 mA"
+         _uut._charger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = 500 });
           double value = 0.0;
           
           _uut._charger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = value });
