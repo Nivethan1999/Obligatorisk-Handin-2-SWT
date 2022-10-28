@@ -18,6 +18,7 @@ public class TestChargeControl
         _display = Substitute.For<Display>();
         _usbCharger = Substitute.For<IUsbCharger>();
         _uut = new ChargeControl(_display,_usbCharger);
+        _usbCharger.CurrentValueEvent += (o, args) => _uut.OnNewCurrent(o,args);
     }
 
      [Test]
@@ -33,7 +34,6 @@ public class TestChargeControl
      {
           double value = 0.0;
           _uut._charger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = value });
-          
           Assert.That(_uut.lastCurrent, Is.EqualTo(value));
      }
 
