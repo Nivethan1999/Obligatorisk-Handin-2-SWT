@@ -143,7 +143,8 @@ namespace ChargingStation
                        break;
 
                   case ChargingStationState.Locked:
-                       Console.WriteLine("Døren er låst");
+                       //Console.WriteLine("Døren er låst");
+                       _display.DoorLocked();
                        break;
                   default:
                        throw new ArgumentOutOfRangeException();

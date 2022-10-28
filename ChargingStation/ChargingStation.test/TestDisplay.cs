@@ -76,5 +76,14 @@ namespace ChargingStation.test
             Assert.That(output.ToString(), Contains.Substring("Brug dit RFID tag til at låse skabet.."));
         }
 
-    }
+
+        [Test]
+        public void DoorLockedTest()
+        {
+             display_.DoorLocked();
+             Assert.That(output.ToString(), Contains.Substring("Døren er låst"));
+
+          }
+
+     }
 }
