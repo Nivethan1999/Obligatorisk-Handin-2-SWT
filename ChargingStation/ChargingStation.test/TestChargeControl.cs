@@ -31,7 +31,7 @@ public class TestChargeControl
     [Test]
      public void TestNormalCharge()
      {
-          _uut._charger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = 500 });
+          _uut._UsbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = 500 });
           Assert.That(_uut.lastCurrent, Is.EqualTo(500));
 
      }
@@ -40,10 +40,10 @@ public class TestChargeControl
      public void TestNoCharge()
      {
          // Sets the state previous to the test to "Charging at 500 mA"
-         _uut._charger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = 500 });
+         _uut._UsbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = 500 });
           double value = 0.0;
           
-          _uut._charger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = value });
+          _uut._UsbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = value });
           _display.Received(1).ConnectPhone();
           
           Assert.That(_uut.lastCurrent, Is.EqualTo(value));
@@ -53,7 +53,7 @@ public class TestChargeControl
      public void TestFullyCharge()
      {
           var value = 3;
-          _uut._charger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = value });
+          _uut._UsbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = value });
          
           Assert.That(_uut.lastCurrent, Is.EqualTo(value));
      }
@@ -62,7 +62,7 @@ public class TestChargeControl
     public void TestStopCharge()
     {
          var value = 501;
-          _uut._charger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = value });
+          _uut._UsbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = value });
          
          Assert.That(_uut.lastCurrent, Is.EqualTo(value));
      }
@@ -70,8 +70,8 @@ public class TestChargeControl
     [Test]
     public void TestOverloadCurrent()
     {
-        _uut._charger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() {Current = 750});
+        _uut._UsbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() {Current = 750});
         _usbCharger.Received(1).StopCharge();
-        Assert.That(_uut._charger.CurrentValue, Is.EqualTo(0));
+        Assert.That(_uut._UsbCharger.CurrentValue, Is.EqualTo(0));
     }
 }

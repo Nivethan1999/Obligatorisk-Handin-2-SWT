@@ -6,32 +6,33 @@ namespace ChargingStation.test;
 
 public class ChargeControl : IChargeControl
 {
-    public IUsbCharger _charger;
+    public IUsbCharger _UsbCharger;
     public IDisplay _display;
     public double lastCurrent { get; private set; }
-    public bool Connected { get; private set; }
+    public bool Connected { get; set; }
     public enum State { Charging, NotCharging, FinishedCharging, Error }
     public State _lastState = State.NotCharging;
     
-    public ChargeControl(IDisplay display, IUsbCharger charger)
+    
+    
+    public ChargeControl(IDisplay display, IUsbCharger usbCharger)
     {
-        _charger = charger;
+        _UsbCharger = usbCharger;
         _display = display;
-        _charger.CurrentValueEvent += OnNewCurrent;
-        Connected = _charger.Connected;
-        lastCurrent = _charger.CurrentValue;
+        _UsbCharger.CurrentValueEvent += OnNewCurrent;
+        Connected = _UsbCharger.Connected;
+        lastCurrent = _UsbCharger.CurrentValue;
 
     }
     
-
     public void StartCharge()
     {
-        _charger.StartCharge();
+        _UsbCharger.StartCharge();
     }
-
+    
     public void StopCharge()
     {
-        _charger.StopCharge();
+        _UsbCharger.StopCharge();
     }
     
     public void OnNewCurrent(object sender, CurrentEventArgs e)
@@ -39,7 +40,7 @@ public class ChargeControl : IChargeControl
         if (e.Current == lastCurrent) return;
         
         lastCurrent = e.Current;
-        Connected = _charger.Connected;
+        Connected = _UsbCharger.Connected;
         
         switch (e.Current)
         {   

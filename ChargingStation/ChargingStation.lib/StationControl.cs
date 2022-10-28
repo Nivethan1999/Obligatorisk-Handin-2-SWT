@@ -26,12 +26,12 @@ namespace ChargingStation
         // Her mangler flere member variable
         public ChargingStationState _state;
         private IUsbCharger _usbcharger;
-        private IDisplay _display;
-        private IChargeControl _charger;
-        private int _oldId;
+        public IDisplay _display;
+        public IChargeControl _charger;
+        public int _oldId;
         public IDoor _door;
-        private ILog _logFile;
-        private IRfidReader _reader;
+        public ILog _logFile;
+        public IRfidReader _reader;
         
 
         
@@ -130,7 +130,6 @@ namespace ChargingStation
                        _logFile.WriteLogEntry("Døren blev åbnet");
                        _display.ConnectPhone();
                        _state = ChargingStationState.DoorOpen;
-                       Console.WriteLine("CURRENT STATE: " + _state);
                        break;
 
                   case ChargingStationState.DoorOpen:
