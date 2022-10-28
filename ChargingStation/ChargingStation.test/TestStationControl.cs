@@ -38,4 +38,29 @@ public class TestStationControl
         _uut.OnDoorOpened(this, new DoorEventArgs() { DoorIsOpen = true });
         Assert.That(_uut._state, Is.EqualTo(DoorOpen));
     }
+
+    [Test]
+    public void TestOnDoorClosedAvailable()
+    {
+        _uut._state = Available;
+        Assert.That(_uut._state, Is.EqualTo(Available));
+    }
+
+    [Test]
+    public void TestOnDoorClosedLocked()
+    {
+        _uut._state = Locked;
+        Assert.That(_uut._state, Is.EqualTo(Locked));
+
+    }
+
+    //[Test]
+    //public void TestOnDoorClosedDoorOpen()
+    //{
+    //    _uut._state = DoorOpen;
+    //    _logFile.Received(1).WriteLogEntry("Døren blev lukket");
+    //    _display.Received(1).LockWithRfid();
+        
+
+    //}
 }
