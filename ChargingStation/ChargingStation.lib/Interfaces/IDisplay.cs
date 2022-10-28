@@ -20,4 +20,6 @@ public interface IDisplay
     
     void ChargeError();
 
+    void DoorLocked();
+
 }

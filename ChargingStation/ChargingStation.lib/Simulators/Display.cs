@@ -32,7 +32,12 @@ public class Display : IDisplay
     {
         Console.WriteLine("Fejl i opladning");
     }
-    
+
+    public void DoorLocked()
+    {
+        Console.WriteLine("Døren er låst");
+    }
+
     public void Occupied()
     {
         Console.WriteLine("Ladeskab optaget");

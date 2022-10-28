@@ -15,7 +15,7 @@ namespace ChargingStation
     public class StationControl
     {
         // Enum med tilstande ("states") svarende til tilstandsdiagrammet for klassen
-        private enum ChargingStationState
+        public enum ChargingStationState
         {
             Available,
             Locked,
@@ -23,7 +23,7 @@ namespace ChargingStation
         };
 
         // Her mangler flere member variable
-        private ChargingStationState _state;
+        public ChargingStationState _state;
         private IUsbCharger _usbcharger;
         private IDisplay _display;
         private IChargeControl _charger;
@@ -52,7 +52,7 @@ namespace ChargingStation
         }
 
         // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
-        private void OnRfidDetected(object source, RfidEventArgs eventArgs)
+        public void OnRfidDetected(object source, RfidEventArgs eventArgs)
         {
             switch (_state)
             {
@@ -102,7 +102,7 @@ namespace ChargingStation
         }
 
         // Triggers til DoorClosed
-        private void OnDoorClosed(object source, DoorEventArgs eventArgs)
+        public void OnDoorClosed(object source, DoorEventArgs eventArgs)
         {
             if (eventArgs.DoorIsOpen) return;
             switch (_state)
@@ -124,7 +124,7 @@ namespace ChargingStation
         }
 
         // Triggers til DoorOpened
-        private void OnDoorOpened(object source, DoorEventArgs eventArgs)
+        public void OnDoorOpened(object source, DoorEventArgs eventArgs)
         {
             if (!eventArgs.DoorIsOpen) return;
              switch (_state)
@@ -140,7 +140,8 @@ namespace ChargingStation
                        break;
 
                   case ChargingStationState.Locked:
-                       Console.WriteLine("Døren er låst");
+                       //Console.WriteLine("Døren er låst");
+                       _display.DoorLocked();
                        break;
                   default:
                        throw new ArgumentOutOfRangeException();
