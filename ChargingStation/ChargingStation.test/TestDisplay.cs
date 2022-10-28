@@ -32,6 +32,8 @@ namespace ChargingStation.test
 
         [Test]
 
+
+
         public void OccupiedTest()
         {
             display_.Occupied();
@@ -65,6 +67,13 @@ namespace ChargingStation.test
         {
             display_.LoadRFID();
             Assert.That(output.ToString(), Contains.Substring("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op."));
+        }
+
+        [Test]
+        public void LockWithRfidTest()
+        {
+            display_.LockWithRfid();
+            Assert.That(output.ToString(), Contains.Substring("Brug dit RFID tag til at låse skabet.."));
         }
 
     }
