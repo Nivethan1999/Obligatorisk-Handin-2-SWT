@@ -70,5 +70,20 @@ public class TestStationControl
     {
         
     }
-    
+
+    [Test]
+    public void TestOnDoorClosedAvailable()
+    {
+        _uut._state = Available;
+        Assert.That(_uut._state, Is.EqualTo(Available));
+    }
+
+    [Test]
+    public void TestOnDoorClosedLocked()
+    {
+        _uut._state = Locked;
+        Assert.That(_uut._state, Is.EqualTo(Locked));
+
+    }
+
 }
