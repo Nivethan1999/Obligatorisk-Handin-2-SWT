@@ -18,6 +18,11 @@ public class Display : IDisplay
     {
         Console.WriteLine("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op.");
     }
+    
+    public void LockWithRfid()
+    {
+        Console.WriteLine("Brug dit RFID tag til at låse skabet..");
+    }
     public void PhoneConnected()
     {
         Console.WriteLine("Telefonen er tilsluttet korrekt");

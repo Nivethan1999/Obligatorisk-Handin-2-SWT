@@ -5,6 +5,8 @@ public interface IDisplay
     
     void ConnectPhone();
     void ConnectionError();
+    
+    void LockWithRfid();
 
     void LoadRFID();
 

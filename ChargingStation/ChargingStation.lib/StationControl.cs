@@ -115,7 +115,7 @@ namespace ChargingStation
                     break;
                 case ChargingStationState.DoorOpen:
                     _logFile.WriteLogEntry("Døren blev lukket");
-                    _display.LoadRFID();
+                    _display.LockWithRfid();
                     _state = ChargingStationState.Available;
                     break;
                 default:

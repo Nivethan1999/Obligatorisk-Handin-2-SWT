@@ -3,6 +3,7 @@ using ChargingStation.lib;
 using ChargingStation.lib.Interfaces;
 using ChargingStation.lib.Simulators;
 using ChargingStation.test;
+using UsbSimulator;
 
 internal class Program
 {
@@ -11,10 +12,10 @@ internal class Program
         Door door = new Door();
         RfidReader rfidReader = new RfidReader();
         Display display = new Display();
-        //ChargeControl chargeControl = new ChargeControl();
+        ChargeControl chargeControl = new ChargeControl(display, new UsbChargerSimulator());
         LogFile log = new LogFile("ProgramLog.txt");
 
-        //var stationControl = new StationControl(rfidReader,  chargeControl, door, display, log);
+        var stationControl = new StationControl(rfidReader,  chargeControl, door, display, log);
         
         // Assemble your system here from all the classes
 
@@ -39,6 +40,7 @@ internal class Program
                 case 'C':
                     door.OnDoorClosed();
                     break;
+                
                 case 'R':
                     Console.WriteLine("Indtast RFID id: ");
                     var idString = Console.ReadLine();
