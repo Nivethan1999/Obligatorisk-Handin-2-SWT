@@ -134,6 +134,44 @@ public class TestStationControl
         Assert.That(_uut._state, Is.EqualTo(state));
     }
     
+    // TEST ON DOOR OPEN
+    [Test]
+    public void TestOnDoorClosedStateAvailible()
+    {
+        _uut._state = Available;
+        _uut.OnDoorClosed(this, new DoorEventArgs() { DoorIsOpen = false });
+        
+        Assert.That(_uut._state, Is.EqualTo(Available));
+    }
+    
+    [Test]
+    public void TestOnDoorClosedStateLocked()
+    {
+        _uut._state = Locked;
+        _uut.OnDoorClosed(this, new DoorEventArgs() { DoorIsOpen = false });
+        Assert.That(_uut._state, Is.EqualTo(Locked));
+    }
+    
+    [Test]
+    public void TestOnDoorClosedStateDoorOpen()
+    {
+        _uut._state = DoorOpen;
+        _uut.OnDoorClosed(this, new DoorEventArgs() { DoorIsOpen = false });
+        _uut._logFile.Received(1).WriteLogEntry("Døren blev lukket");
+        _uut._display.Received(1).LockWithRfid();
+        Assert.That(_uut._state, Is.EqualTo(Available));
+    }
+    
+    [TestCase(Available)]
+    [TestCase(Locked)]
+    [TestCase(DoorOpen)]
+    public void TestOnDoorClosedArgTrue(StationControl.ChargingStationState state)
+    {
+        _uut._state = state;
+        _uut.OnDoorClosed(this, new DoorEventArgs() { DoorIsOpen = true });
+        Assert.That(_uut._state, Is.EqualTo(state));
+    }
+
     
 
 }
