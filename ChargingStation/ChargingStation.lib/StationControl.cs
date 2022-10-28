@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ namespace ChargingStation
     public class StationControl
     {
         // Enum med tilstande ("states") svarende til tilstandsdiagrammet for klassen
-        private enum ChargingStationState
+        public enum ChargingStationState
         {
             Available,
             Locked,
@@ -23,12 +24,12 @@ namespace ChargingStation
         };
 
         // Her mangler flere member variable
-        private ChargingStationState _state;
+        public ChargingStationState _state;
         private IUsbCharger _usbcharger;
         private IDisplay _display;
         private IChargeControl _charger;
         private int _oldId;
-        private IDoor _door;
+        public IDoor _door;
         private ILog _logFile;
         private IRfidReader _reader;
         
@@ -44,15 +45,15 @@ namespace ChargingStation
             _display = display;
             _logFile = logFile;
 
-            _door.DoorEvent += this.OnDoorOpened;
-            _door.DoorEvent += this.OnDoorClosed;
-                
-            _reader.RfidEvent += this.OnRfidDetected;
+            door.DoorEvent += OnDoorOpened;
+            door.DoorEvent += OnDoorClosed;
+            
+            reader.RfidEvent += OnRfidDetected;
 
         }
 
         // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
-        private void OnRfidDetected(object source, RfidEventArgs eventArgs)
+        public void OnRfidDetected(object source, RfidEventArgs eventArgs)
         {
             switch (_state)
             {
@@ -102,7 +103,7 @@ namespace ChargingStation
         }
 
         // Triggers til DoorClosed
-        private void OnDoorClosed(object source, DoorEventArgs eventArgs)
+        public void OnDoorClosed(object source, DoorEventArgs eventArgs)
         {
             if (eventArgs.DoorIsOpen) return;
             switch (_state)
@@ -121,10 +122,11 @@ namespace ChargingStation
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            Console.WriteLine("CURRENT STATE: " + _state);
         }
 
         // Triggers til DoorOpened
-        private void OnDoorOpened(object source, DoorEventArgs eventArgs)
+        public void OnDoorOpened(object source, DoorEventArgs eventArgs)
         {
             if (!eventArgs.DoorIsOpen) return;
              switch (_state)
@@ -133,6 +135,7 @@ namespace ChargingStation
                        _logFile.WriteLogEntry("Døren blev åbnet");
                        _display.ConnectPhone();
                        _state = ChargingStationState.DoorOpen;
+                       Console.WriteLine("CURRENT STATE: " + _state);
                        break;
 
                   case ChargingStationState.DoorOpen:
@@ -145,6 +148,7 @@ namespace ChargingStation
                   default:
                        throw new ArgumentOutOfRangeException();
              }
+             
         }
 
         // Her mangler de andre trigger handlere
