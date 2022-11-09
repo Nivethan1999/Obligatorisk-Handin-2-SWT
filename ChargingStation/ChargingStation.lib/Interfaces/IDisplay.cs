@@ -2,7 +2,7 @@ namespace ChargingStation.lib.Interfaces;
 
 public interface IDisplay
 {
-    
+   // Methods to be implemented 
     void ConnectPhone();
     void ConnectionError();
     
